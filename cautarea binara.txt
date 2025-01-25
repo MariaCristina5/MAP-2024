@@ -1,0 +1,32 @@
+Sortarea array-ului: Căutarea binară funcționează doar pe un array sortat.
+Inițializare: Se definesc limitele de început și sfârșit ale intervalului de căutare (stanga și dreapta).
+Determinarea mijlocului: Se calculează poziția mijlocului intervalului curent:
+mijloc=stanga+(dreapta−stanga)/2
+Compararea elementului căutat:
+Dacă elementul de la mijloc este egal cu cel căutat, algoritmul se oprește.
+Dacă elementul căutat este mai mic decât cel de la mijloc, căutarea continuă în jumătatea stângă a array-ului.
+Dacă elementul căutat este mai mare decât cel de la mijloc, căutarea continuă în jumătatea dreaptă.
+Repetare: Pasul 3 și 4 se repetă până când intervalul devine gol (adică stanga > dreapta), caz în care elementul nu se află în array.
+
+
+int binarySearch(int arr [ ], int n, int x) {
+    int stanga = 0, dreapta = n - 1;
+
+    while (stanga <= dreapta) {
+        int mijloc = stanga + (dreapta - stanga) / 2;
+
+        // Verificăm dacă elementul este la mijloc
+        if (arr[mijloc] == x)
+            return mijloc;
+
+        // Dacă elementul căutat este mai mic, căutăm în stânga
+        if (arr[mijloc] > x)
+            dreapta = mijloc - 1;
+        else
+            // Dacă elementul căutat este mai mare, căutăm în dreapta
+            stanga = mijloc + 1;
+    }
+
+    // Dacă nu am găsit elementul, returnăm -1
+    return -1;
+}
